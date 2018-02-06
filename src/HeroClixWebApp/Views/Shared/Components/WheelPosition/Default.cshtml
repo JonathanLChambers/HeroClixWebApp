@@ -1,0 +1,76 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<HeroClixWebApp.Models.WheelPositionsStats>
+
+
+    
+
+
+<table class="mdl-table clix" align="center" cellspacing="0">
+    
+   
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            var imageLocation = "images/Attack";
+            imageLocation = imageLocation + item.StatId + ".jpg";
+            <tr>
+                @switch (item.StatId)
+                {
+                    case 1:
+                        <th title="Movement"><img src="@imageLocation" class="statImages"/></th>
+                        break;
+                    case 2:
+                        <th title="Attack"><img src="@imageLocation" class="statImages"/></th>
+                        break;
+                    case 3:
+                        <th title="Defense"><img src="@imageLocation" class="statImages"/></th>
+                        break;
+                    case 4:
+                        <th title="Damage"><img src="@imageLocation" class="statImages"/></th>
+                        break;
+                }
+                <td>@Html.DisplayFor(modelItem => item.Value)</td>
+            </tr>
+
+        }
+    }
+    else
+    {
+        for (var i = 1; i < 5; i++)
+        {
+            var imageLocation = "images/Attack";
+            imageLocation = imageLocation + i + ".jpg";
+            <tr>
+                @switch (i)
+                {
+                    case 1:
+                        <th title="Movement"><img src="@imageLocation" class="statImages" /></th>
+                        break;
+                    case 2:
+                        <th title="Attack"><img src="@imageLocation" class="statImages" /></th>
+                        break;
+                    case 3:
+                        <th title="Defense"><img src="@imageLocation" class="statImages" /></th>
+                        break;
+                    case 4:
+                        <th title="Damage"><img src="@imageLocation" class="statImages" /></th>
+                        break;
+                }
+                <td>KO</td>
+            </tr>
+        }
+    }
+
+
+
+</table>
+
+@*</ul>*@
+
+@*</div>*@
+    

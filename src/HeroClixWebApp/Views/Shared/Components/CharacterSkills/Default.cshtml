@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<HeroClixWebApp.Models.WheelPositionsSkills.DescriptionName>
+<div class="table-responsive">
+    <table class="table table-striped skills" cellspacing="0">
+        
+        @foreach (var item in Model)
+        {
+            <tr class="skills">
+                <th>@Html.DisplayFor(modelItem => item.SkillName)</th>
+                <td>@Html.DisplayFor(modelItem => item.SkillDescription)</td>
+            </tr>
+        }
+    </table>
+</div>
+@*<div class="image">
+    <ul style="list-style: none;">
+        @foreach (var item in Model)
+            {
+            <li>@Html.DisplayFor(modelItem => item.Skill)</li>
+
+        }
+    </ul>
+    <img src="/images/Click Abilities.png" />
+</div>*@

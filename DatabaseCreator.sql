@@ -1,0 +1,99 @@
+﻿
+
+USE [MASTER]
+IF EXISTS (SELECT 1 FROM sys.databases WHERE Name = 'COOLSTUFF')
+DROP DATABASE COOLSTUFF
+GO
+
+
+
+
+
+CREATE DATABASE COOLSTUFF
+GO
+USE COOLSTUFF
+GO
+CREATE TABLE CharacterTable
+(
+CharacterID INT IDENTITY
+,Name VARCHAR(150)
+,PointValue INT
+,Movement INT
+,Size	INT
+,Indomitable VARCHAR(150)
+,Range INT
+,Targets INT
+,PRIMARY KEY (CharacterID)
+);
+
+
+CREATE TABLE BaseStat
+(
+StatID INT IDENTITY
+,StatName VARCHAR (150)
+PRIMARY KEY (StatID)
+);
+
+CREATE TABLE Skills
+(
+SkillID INT IDENTITY
+,SkillName VARCHAR (150)
+,SkillDescription VARCHAR (2000)
+,PRIMARY KEY (SkillID)
+);
+
+CREATE TABLE WheelPositionsStats
+(
+PID INT IDENTITY
+,OrdinalPosition INT
+, CharacterID INT
+,StatID INT
+,Value INT
+,PRIMARY KEY (PID)
+,FOREIGN KEY (CharacterID) REFERENCES CharacterTable(CharacterID)
+,FOREIGN KEY (StatID) REFERENCES BaseStat(StatID)
+);
+
+CREATE TABLE WheelPositionsSkills
+(
+PID INT IDENTITY
+,OrdinalPosition INT
+,CharacterID INT
+,SkillID INT
+,PRIMARY KEY (PID)
+,FOREIGN KEY (CharacterID) REFERENCES CharacterTable(CharacterID)
+,FOREIGN KEY (SkillID) REFERENCES Skills(SkillID)
+,FOREIGN KEY (PID) REFERENCES WheelPositionsStats(PID)
+
+);
+
+CREATE TABLE Users
+(
+UserID INT IDENTITY
+,Usernames VARCHAR (150)
+,Passwords VARCHAR (150)
+,PRIMARY KEY (UserID)
+);
+
+CREATE TABLE Decks
+(
+DeckID INT
+,UserID INT
+,Deckname VARCHAR (150)
+,PRIMARY KEY (DeckID)
+,FOREIGN KEY (UserID) REFERENCES Users(UserID)
+,
+);
+
+CREATE TABLE Team
+(DeckID INT
+,CharacterID INT
+,PRIMARY KEY (DeckID)
+,FOREIGN KEY (CharacterID) REFERENCES CharacterTable(CharacterID)
+,FOREIGN KEY (DeckID) REFERENCES Decks(DeckID)
+);
+
+
+
+
+

@@ -1,0 +1,214 @@
+﻿body {
+    background-color: #424242;
+    overflow: hidden;
+}
+
+#characterSelect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #212121;
+    height: 60px;
+    padding: 0;
+    font-size: 30px;
+    color: #FFFFFF;
+    line-height: 60px;
+    text-align: center;
+    width: 16.6666666667%;
+    z-index: 2;
+}
+
+#appName {
+    position: fixed;
+    top: 0;
+    right: 33.3333333%;
+    background-color: #212121;
+    height: 60px;
+    padding: 0;
+    color: #FFFFFF;
+    font-size: 30px;
+    line-height: 60px;
+    text-align: center;
+    width: 50%;
+    z-index: 2;
+}
+
+#teamPowerTotal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #212121;
+    height: 60px;
+    padding: 0;
+    color: #FFFFFF;
+    line-height: 60px;
+    text-align: center;
+    width: 33.3333333%;
+    z-index: 2;
+}
+
+#characterName {
+    color: #ff0000;
+    margin-top: 0;
+    padding: 0;
+    position: absolute;
+    top: 9%;
+    left: 16%;
+    width: 42.3%;
+    text-align: center;
+    font-size: 50px;
+    border: 1px solid red;
+}
+
+.characterButtonHolder {
+    height: 100%;
+    width: auto;
+    overflow: hidden;
+}
+
+.characterButtonHolderTwo {
+    height: 100vh;
+    width: 24%;
+    overflow: scroll;
+    padding-right: 0;
+}
+
+.characterButtonHolderThree {
+    width: auto;
+    height: 70px;
+}
+
+.characterButtonHolder::-webkit-scrollbar,
+.characterButtonHolderTwo::-webkit-scrollbar,
+.characterButtonHolderThree::-webkit-scrollbar {
+    display: none;
+}
+
+.clixCounter {
+    color: #ff0000;
+    margin-top: 60px;
+    padding: 0;
+    position: absolute;
+    top: 1%;
+    left: 15%;
+    right: 41.6666666667%;
+}
+
+#clickInstructions {
+    position: absolute;
+    top: 130px;
+    left: 3%;
+    font-size: 35px;
+    width: 97%;
+    text-align: center;
+    border: 1px solid yellow;
+}
+.wrong {
+    position: absolute;
+    top: 220px;
+    left: 3%;
+    width: 97%;
+    font-size: 25px;
+    text-align: center;
+    border: 1px solid orange;
+}
+.currentClick {
+    position: absolute;
+    top: 180px;
+    left: 3%;
+    font-size: 30px;
+    width: 97%;
+    text-align: center;
+    border: 1px solid pink;
+}
+
+
+.back::after {
+    content: "";
+    border-radius: 0;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    widt
+}
+
+.characterStatTableHolder {
+    position: absolute;
+    bottom: 0;
+    left: 16%;
+    height: 32%;
+    width: 42.6%;
+    padding: 0;
+    color: red;
+    border: 1px solid blue;
+}
+
+.stats {
+    width: 60%;
+    margin-left: 25%; 
+    font-size: 30px;
+    border: hidden;
+    color: red;
+}
+
+.skills {
+    width: 50%;
+    margin: 0; 
+    font-size: 20px;
+    border: hidden;
+    color: red;
+}
+
+.characterSkillsHolder {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 93%;
+    width: 41.66666666667%;
+    padding: 0;
+    margin-top: 60px;
+    color: red;
+    border: 1px solid green;
+}
+
+.showAll {
+    background-color: #1565C0;
+    color: #E3F2FD;
+    position: absolute;
+    bottom: 1%;
+    right: 45%;
+    border-radius: 0;
+    box-shadow: 0 1px 2px #4D4E4F;
+    border-radius: 0;
+    -webkit-transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.showAll::after {
+    content: "";
+    border-radius: 0;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 30px #4D4E4F;
+    box-shadow: 0 0 30px #4D4E4F;
+    opacity: 0;
+    -webkit-transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.showAll:hover {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+    z-index: 1;
+}
+
+.showAll:hover::after {
+    -ms-opacity: 1;
+    opacity: 1;
+    z-index: 1;
+}

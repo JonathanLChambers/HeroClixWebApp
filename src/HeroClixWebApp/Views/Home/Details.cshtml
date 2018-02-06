@@ -1,0 +1,237 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model HeroClixWebApp.Models.CharacterTable
+@{
+    ViewData["Title"] = "Home Page";
+}
+@*<div class="row">
+    <div class="col-md-4 details">*@
+
+
+
+
+@*<div class="clixCounter">*@
+
+    @*<button class="btn back" onclick="goBack()"> Go Back</button>
+    <script>
+    function goBack() {
+    window.history.back();
+    }
+    </script>*@
+    <script>
+
+        var showAll = false;
+        var ordinalPosition;
+        var ordinalPositionDisplay = 0;
+        var statsUrl = "/Home/DetailsVC/";
+        var skillsUrl = "/Home/SkillsVC/";
+        $(document).ready(function () {
+            $(".addClick").click(function () {
+
+                //alert(ordinalPosition);
+                if (ordinalPosition == null) {
+                    ordinalPosition = 1;
+                }
+                //if (!(hasData)) {
+                //    alert("Blerg");
+                //}
+                //alert(ordinalPosition);
+                //ViewBag.ordinalPosition = ViewBag.ordinalPosition + 1;
+                ordinalPosition++;
+                $(".currentClick").text("Current Damage Click: " + ++ordinalPositionDisplay);
+                //alert(ordinalPosition);
+                //e.preventDefault();
+                //make the ajax call and get new data/markup for the
+                //  div rendered by your first view component and update it
+
+
+                $("#wheelPositionPartial").load(statsUrl, { OrdinalPosition: ordinalPosition });
+                if (showAll) {
+                    $(".characterSkillsHolder").load(skillsUrl);
+                } else {
+                    $(".characterSkillsHolder").load(skillsUrl, { OrdinalPosition: ordinalPosition });
+                }//alert(ordinalPosition);
+                //$("#wheelPositionPartial").hide();
+
+            });
+
+        });
+
+        $(document).ready(function () {
+            $(".subtractClick").click(function () {
+                //alert(ordinalPosition);
+
+                if (ordinalPosition == null) {
+                    ordinalPosition = 1;
+                }
+                //alert(ordinalPosition);
+                //ViewBag.ordinalPosition = ViewBag.ordinalPosition + 1;
+                if (ordinalPosition == 1) {
+                    //$(".wrong").show();
+                    $(".wrong").html("You cannot have any fewer clix.").show();
+                    //$(".wrong").delay(32000).html(" bleh").show();
+                    window.setTimeout(function() {
+                            $(".wrong").html('&nbsp;');
+                        },
+                        3000);
+                } else {
+                    ordinalPosition--;
+                    ordinalPositionDisplay--;
+                    //if (ordinalPositionDisplay == 0) {
+                    //    $(".currentClick").text("Current Damage Click: Base");
+                    //}else{
+                    $(".currentClick").text("Current Damage Click: " + ordinalPositionDisplay);
+                    //}
+                    //alert(url);
+                    $("#wheelPositionPartial").load(statsUrl, { OrdinalPosition: ordinalPosition });
+                    if (showAll) {
+                        $(".characterSkillsHolder").load(skillsUrl);
+                    } else {
+                        $(".characterSkillsHolder").load(skillsUrl, { OrdinalPosition: ordinalPosition });
+                    }
+                    //if()
+                }
+
+                //alert(ordinalPosition);
+                //e.preventDefault();
+                //make the ajax call and get new data/markup for the
+                //  div rendered by your first view component and update it
+
+                //alert(ordinalPosition);
+                //$("#wheelPositionPartial").hide();
+
+            });
+
+        });
+        $(document).ready(function () {
+            $(".showAll").click(function () {
+                if (showAll) {
+                    showAll = false;
+                    $(".characterSkillsHolder").load(skillsUrl, { OrdinalPosition: ordinalPosition });
+                    $(this).text("Show All");
+                } else {
+                    showAll = true;
+                    $(".characterSkillsHolder").load(skillsUrl);
+                    $(this).text("Show Less");
+                }
+            });
+        });
+    </script>
+<div class="mdl-grid">
+    <div id="characterName" class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+            @ViewData["CharacterName"]
+        </div>
+    </div>
+    <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
+        @*id="clickInstructions"*@
+        <div class="mdl-cell mdl-cell--12-col center">
+            Click to change wheel position.
+        </div>
+        <div class="mdl-cell mdl-cell--12-col currentClick">Current Damage Click: 0</div>
+        <div class="mdl-cell mdl-cell--12-col wrong">&nbsp;</div>
+        <div id="wheelPositionPartial" class="mdl-cell mdl-cell--12-col">
+            @*<img src="/images/Click Abilities.png" class="mdl-cell mdl-cell--2-col" />*@
+            @await Component.InvokeAsync("WheelPosition", new { ViewBag.id, ViewBag.ordinalPosition })
+        </div>
+        <div class="mdl-cell mdl-cell--12-col">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white subtractClick">
+                -
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white addClick">
+                +
+            </button>
+        </div>
+    </div>
+    <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col characterSkillsHolder">
+            @await Component.InvokeAsync("CharacterSkills", new { ViewBag.id, ViewBag.ordinalPosition })
+            <button id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white showAll">Show All</button>
+        </div>
+        @*<table class="table table-md skills">
+            <tr class="skills">
+            <th>Skill</th>
+            <td>Description of the skill.</td>
+            </tr>
+            </table>*@
+    </div>
+    @*<div class="image">
+        <ul style="list-style: none;">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        </ul>
+        <img src="/images/Click Abilities.png"/>
+        </div>*@
+
+    <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+            <table class="mdl-data-table stats" align="center">
+                <tr class="">
+                    <th>Point Value: </th>
+                    <td class="">@Html.DisplayFor(m => m.PointValue)</td>
+                </tr>
+                <tr class="stats">
+                    <th>Movement: </th>
+                    <td>@Html.DisplayFor(m => m.Movement)</td>
+                </tr>
+                <tr class="stats">
+                    <th>Range: </th>
+                    <td>@Html.DisplayFor(m => m.Range)</td>
+                </tr>
+                <tr class="stats">
+                    <th>Size: </th>
+                    <td>@Html.DisplayFor(m => m.Size)</td>
+                </tr>
+                <tr class="stats">
+                    <th>Targets</th>
+                    <td>@Html.DisplayFor(m => m.Targets)</td>
+                </tr>
+
+
+                @*@Html.DisplayFor(m => m.PointValue)
+                @Html.DisplayFor(m => m.Movement)*@
+            </table>
+        </div>
+    </div>
+</div>
+        @*<div class="CharacterSkillsViewComponent">
+
+        </div>*@
+@*<div class="characterSkillsHolder">*@
+    @*@await Component.InvokeAsync("CharacterSkills", new { ViewBag.id, ViewBag.ordinalPosition })*@
+    @*<table class="table table-md skills">
+            <tr class="skills">
+            <th>Skill</th>
+            <td>Description of the skill.</td>
+            </tr>
+            </table>*@
+@*</div>*@
+
+
+@*<button class="btn showAll">Show All</button>*@
+
+
+
+   
+@*</div>*@
+
+@*</div>*@
+
+@*</div>
+</div>*@
+@*@foreach (var item in Model)
+{
+    <div class="row">
+        <a asp-controller="Home" asp-action="Details" asp-route-id="@item.CharacterId">
+            <div id="characterButton" class="col-md-2 col-lg-2">
+                @Html.DisplayFor(modelItem => item.Name)
+
+
+            </div>
+        </a>
+    </div>
+    
+}*@
